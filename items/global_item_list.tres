@@ -5,4 +5,4 @@
 
 [resource]
 script = ExtResource("2_mxfar")
-items = Array[Resource]([ExtResource("1_tr6un"), ExtResource("1_tr6un")])
+items = Array[Resource]([ExtResource("1_tr6un"), ExtResource("1_tr6un"), ExtResource("1_tr6un")])
