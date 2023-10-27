@@ -3,7 +3,7 @@ class_name Inventory
 
 signal items_changed(indexes)
 
-@export var items: Array[Resource] = [null,null,null,null,null,null,null,null,null]
+@export var items: Array[Resource] = []
 
 func set_item(item_index: int, item: Item) -> Item:
 	var previous_item: Item = items[item_index] 

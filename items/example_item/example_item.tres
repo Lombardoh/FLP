@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bngmls61f0dbr"]
 
-[ext_resource type="Script" path="res://item.gd" id="1_6yit2"]
+[ext_resource type="Script" path="res://items/item.gd" id="1_ivjwl"]
 [ext_resource type="Texture2D" uid="uid://cbq0teiqciqei" path="res://items/example_item/example_item.png" id="2_xof0q"]
 
 [resource]
-script = ExtResource("1_6yit2")
+script = ExtResource("1_ivjwl")
 name = "Fernet"
-description = "Fernet used as example"
+description = "example cordoba item"
 texture = ExtResource("2_xof0q")
