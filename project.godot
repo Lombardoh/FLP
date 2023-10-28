@@ -11,6 +11,6 @@ config_version=5
 [application]
 
 config/name="Flp"
-run/main_scene="res://inventory/inventory_display.tscn"
+run/main_scene="res://playground/playground.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"

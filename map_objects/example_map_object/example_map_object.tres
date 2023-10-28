@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MapObject" load_steps=3 format=3 uid="uid://qe4axw48myyt"]
+
+[ext_resource type="Script" path="res://map_objects/map_object.gd" id="1_y7g8w"]
+[ext_resource type="Texture2D" uid="uid://tadixkvkqv3f" path="res://map_objects/example_map_object/example_map_object.png" id="2_ahxku"]
+
+[resource]
+script = ExtResource("1_y7g8w")
+name = "Map object example"
+description = "tactical choripan as a map object example"
+texture = ExtResource("2_ahxku")
