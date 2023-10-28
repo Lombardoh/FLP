@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="MapObjects" load_steps=3 format=3 uid="uid://kmcf7oe2foxa"]
+
+[ext_resource type="Script" path="res://map_objects/map_objects.gd" id="1_7lr2t"]
+[ext_resource type="Resource" uid="uid://qe4axw48myyt" path="res://map_objects/example_map_object/example_map_object.tres" id="1_kg111"]
+
+[resource]
+script = ExtResource("1_7lr2t")
+map_objects = Array[Resource]([ExtResource("1_kg111")])
