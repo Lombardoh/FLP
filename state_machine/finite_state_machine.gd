@@ -5,7 +5,7 @@ extends Node
 var current_state: State
 var states: Dictionary = {}
 
-func _ready():
+func _ready() -> void:
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child
@@ -15,12 +15,11 @@ func _ready():
 		initial_state.enter_state()
 		current_state = initial_state
 
-func _process(delta):
+func _process(delta) -> void:
 	if current_state:
 		current_state.update(delta)
 
-func _physics_process(delta):
-	print(current_state)
+func _physics_process(delta) -> void:
 	if current_state:
 		current_state.physics_update(delta)
 

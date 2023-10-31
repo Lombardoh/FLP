@@ -2,9 +2,12 @@ extends State
 class_name FollowState
 
 @export var actor: CharacterBody2D
+@export var animation_player: AnimationPlayer
 
 func enter_state() -> void:
-	actor.velocity = (get_tree().get_first_node_in_group("target").position - actor.global_position) * 5
+	var direction: Vector2 = (get_tree().get_first_node_in_group("target").position - actor.global_position).normalized()
+	actor.velocity = direction * actor.speed
+	animation_player.play("move")
 
 func exit_state() -> void:
 	pass
