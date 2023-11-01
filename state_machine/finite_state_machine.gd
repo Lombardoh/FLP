@@ -2,6 +2,7 @@ class_name FiniteStateMachine
 extends Node
 
 @export var initial_state: State
+@export var actor: CharacterBody2D
 var current_state: State
 var states: Dictionary = {}
 
@@ -34,3 +35,5 @@ func on_child_transition(state: State, new_state_name: String) -> void:
 	
 	new_state.enter_state()
 	current_state = new_state
+
+

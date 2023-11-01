@@ -1,0 +1,107 @@
+[gd_scene load_steps=12 format=3 uid="uid://cick8xahvy3ra"]
+
+[ext_resource type="Script" path="res://Enemies/test_enemy/test_enemy.gd" id="1_h7ckw"]
+[ext_resource type="Texture2D" uid="uid://c7nx4nlg26ktb" path="res://Enemies/test_enemy/test_enemy.png" id="2_bh7ld"]
+[ext_resource type="Script" path="res://state_machine/finite_state_machine.gd" id="3_b2xo5"]
+[ext_resource type="Script" path="res://state_machine/states/follow_state.gd" id="4_0gvtj"]
+[ext_resource type="Script" path="res://state_machine/states/idle_state.gd" id="5_b5aq6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qwino"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1w2cp"]
+
+[sub_resource type="Animation" id="Animation_x2uka"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_yphac"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_jt5yv"]
+resource_name = "move"
+length = 1.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 37]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_spxqo"]
+_data = {
+"RESET": SubResource("Animation_x2uka"),
+"idle": SubResource("Animation_yphac"),
+"move": SubResource("Animation_jt5yv")
+}
+
+[node name="enemy" type="CharacterBody2D"]
+script = ExtResource("1_h7ckw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_bh7ld")
+hframes = 13
+vframes = 5
+region_rect = Rect2(0, 0, 96, 96)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visibility_layer = 7
+shape = SubResource("RectangleShape2D_qwino")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1w2cp")
+disabled = true
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_b2xo5")
+initial_state = NodePath("FollowState")
+
+[node name="FollowState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player") groups=["enemy"]]
+script = ExtResource("4_0gvtj")
+actor = NodePath("../..")
+target_name = "target"
+animation_player = NodePath("../../AnimationPlayer")
+
+[node name="ActorIdleState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player")]
+script = ExtResource("5_b5aq6")
+actor = NodePath("../..")
+animation_player = NodePath("../../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_spxqo")
+}
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
