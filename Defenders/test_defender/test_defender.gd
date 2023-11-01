@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var health: int = 20
 var speed: int = 30
-var damage: int = 5
+var damage: int = 7
 var target: Node2D
 @export var attack_timer: Timer
 @onready var progress_bar: ProgressBar = $ProgressBar
@@ -10,11 +10,10 @@ var target: Node2D
 func _ready():
 	progress_bar.max_value = health
 	progress_bar.value = health
-	target = get_tree().get_first_node_in_group("target")
 
 func _physics_process(delta):
 	move_and_slide()
-
+	
 func _set_target(new_target: Node2D):
 	target = new_target
 

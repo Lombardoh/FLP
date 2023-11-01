@@ -1,23 +1,20 @@
 extends State
-class_name IdleState
+class_name DeathState
 
 @export var actor: CharacterBody2D
 @export var animation_player: AnimationPlayer
 
 func enter_state() -> void:
 	actor.velocity = Vector2()
-	animation_player.play("idle")
+	animation_player.play("death")
 
 func exit_state() -> void:
-	pass
+	actor.queue_free()
 
 func update(_delta: float):
 	pass
 	
 func physics_update(_delta: float):
-	if is_instance_valid(actor.target):
-		Transition.emit(self, "FollowState")
-		
-	if actor.health < 1:
-		Transition.emit(self, "DeathState")
+	if not animation_player.is_playing():
+		exit_state()
 		
