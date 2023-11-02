@@ -17,21 +17,22 @@ func _physics_process(delta: float) -> void:
 		not is_equal_approx(zoom.x, _target_zoom)
 		)
 
-func zoom_in() -> void:
-	_target_zoom = max(_target_zoom - ZOOM_INCREMENT, MIN_ZOOM)
-	set_physics_process(true)
-
-func zoom_out() -> void:
-	_target_zoom = min(_target_zoom + ZOOM_INCREMENT, MAX_ZOOM)
+func change_zoom(direction: float) -> void:
+	if direction == 0.0:
+		_target_zoom = 1.0
+	else:
+		_target_zoom = clampf(_target_zoom + direction * ZOOM_INCREMENT, MIN_ZOOM, MAX_ZOOM)
 	set_physics_process(true)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if event.button_mask == MOUSE_BUTTON_MASK_MIDDLE:
 			position -= event.relative * zoom
-	if event is InputEventMouseButton:
-		if event.is_pressed():
-			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-				zoom_in()
-			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-				zoom_out()
+	if event is InputEventMouseButton and event.is_pressed():
+		match event.button_index:
+			MOUSE_BUTTON_WHEEL_UP:
+				change_zoom(1.0)
+			MOUSE_BUTTON_WHEEL_DOWN:
+				change_zoom(-1.0)
+			MOUSE_BUTTON_XBUTTON1:
+				change_zoom(0.0)
