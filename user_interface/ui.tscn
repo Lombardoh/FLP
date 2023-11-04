@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://wlwb401pbpdi"]
+
+[ext_resource type="Script" path="res://user_interface/health_ui.gd" id="1_4jqmm"]
+[ext_resource type="Script" path="res://user_interface/spawn_buttons.gd" id="1_kaa0h"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="HealthUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_4jqmm")
+health = 100
+
+[node name="HPLabel" type="Label" parent="HealthUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="SpawnButtons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_kaa0h")
+
+[node name="TrapButton" type="Button" parent="SpawnButtons"]
+offset_left = 64.0
+offset_top = 576.0
+offset_right = 192.0
+offset_bottom = 640.0
+text = "Trap"
+
+[node name="DefenderButton" type="Button" parent="SpawnButtons"]
+offset_left = 256.0
+offset_top = 576.0
+offset_right = 384.0
+offset_bottom = 640.0
+text = "Defender"
+
+[node name="EnemyButton" type="Button" parent="SpawnButtons"]
+offset_left = 448.0
+offset_top = 576.0
+offset_right = 576.0
+offset_bottom = 640.0
+text = "Enemy"
+
+[connection signal="pressed" from="SpawnButtons/TrapButton" to="SpawnButtons" method="_on_trap_button_pressed"]
+[connection signal="pressed" from="SpawnButtons/DefenderButton" to="SpawnButtons" method="_on_defender_button_pressed"]
+[connection signal="pressed" from="SpawnButtons/EnemyButton" to="SpawnButtons" method="_on_enemy_button_pressed"]
