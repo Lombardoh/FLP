@@ -1,25 +1,18 @@
 extends State
 class_name AttackState
 
-@export var actor: CharacterBody2D
-@export var animation_player: AnimationPlayer
-
 func enter_state() -> void:
 	actor.velocity = Vector2()
 	animation_player.play("attack")
-	actor.target.take_damage(actor.damage)
-
-func exit_state() -> void:
-	pass
-
-func update(_delta: float):
-	pass
+	if actor.current_target.has_method("take_damage"):
+		actor.current_target.take_damage(actor.attack_damage)
+		if actor.current_target.health <= 0:
+			actor.set_new_target()
 	
 func physics_update(_delta: float):
-	if not actor.target:
-		Transition.emit(self, "IdleState")
-	else:
+	if actor.current_target and not animation_player.is_playing():
 		Transition.emit(self, "AttackIntervalState")
-
-	if actor.health < 1:
-		Transition.emit(self, "DeathState")
+		
+	elif not animation_player.is_playing():
+		Transition.emit(self, "IdleState")
+		return
