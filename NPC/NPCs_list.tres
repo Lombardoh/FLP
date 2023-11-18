@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="InventoryData" load_steps=4 format=3 uid="uid://bb14btjxabdrw"]
+
+[ext_resource type="Script" path="res://inventory/inventory_data.gd" id="1_25gnl"]
+[ext_resource type="Resource" uid="uid://cqdv0qeuslbfn" path="res://NPC/defenders/test_defender/defender_slot.tres" id="2_y6l5g"]
+[ext_resource type="Resource" uid="uid://p35ypyksqpyg" path="res://NPC/enemies/test_enemy/enemy_slot.tres" id="3_q7iic"]
+
+[resource]
+script = ExtResource("1_25gnl")
+slot_datas = Array[Resource("res://inventory/slot_data.gd")]([ExtResource("2_y6l5g"), ExtResource("3_q7iic"), null, null, null, null, null, null])

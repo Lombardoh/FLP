@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b61022d5rrivy"
-path="res://.godot/imported/test_enemy.png-63ccbaa511054002bf6e6a800d05ec4e.ctex"
+uid="uid://c60nj03s2am2y"
+path="res://.godot/imported/defender_portrait.png-7915c4d5550928f48fe842200d1056db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://NPC/enemies/test_enemy/test_enemy.png"
-dest_files=["res://.godot/imported/test_enemy.png-63ccbaa511054002bf6e6a800d05ec4e.ctex"]
+source_file="res://NPC/defenders/test_defender/defender_portrait.png"
+dest_files=["res://.godot/imported/defender_portrait.png-7915c4d5550928f48fe842200d1056db.ctex"]
 
 [params]
 

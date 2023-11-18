@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SlotData" load_steps=3 format=3 uid="uid://cqdv0qeuslbfn"]
+
+[ext_resource type="Resource" uid="uid://6p648v76gr74" path="res://NPC/defenders/test_defender/defender_data.tres" id="1_524tn"]
+[ext_resource type="Script" path="res://inventory/slot_data.gd" id="2_0rwfb"]
+
+[resource]
+script = ExtResource("2_0rwfb")
+npc_data = ExtResource("1_524tn")
