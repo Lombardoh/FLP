@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://drkhwqtc0jjix"]
 
-[ext_resource type="Texture2D" uid="uid://c7nx4nlg26ktb" path="res://NPC/enemies/test_enemy/test_enemy.png" id="2_7lcmw"]
+[ext_resource type="Texture2D" uid="uid://d4mymfb404m0l" path="res://NPC/defenders/test_defender/test_defender.png" id="1_stnk3"]
 [ext_resource type="Script" path="res://state_machine/finite_state_machine.gd" id="3_wnfls"]
 [ext_resource type="Script" path="res://state_machine/states/idle_state.gd" id="4_sp4bv"]
 [ext_resource type="Script" path="res://state_machine/states/follow_state.gd" id="5_ijoia"]
@@ -127,14 +127,14 @@ collision_mask = 6
 script = SubResource("GDScript_qrsf7")
 health = 30
 mov_speed = 20.0
-attack_speed = 10.0
+attack_speed = 1.0
 valid_targets = Array[String](["enemy"])
 attack_damage = 10
 state_machine = NodePath("FiniteStateMachine")
 attack_timer = NodePath("AttackTimer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_7lcmw")
+texture = ExtResource("1_stnk3")
 hframes = 13
 vframes = 5
 region_rect = Rect2(0, 0, 96, 96)

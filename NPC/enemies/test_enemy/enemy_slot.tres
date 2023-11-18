@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SlotData" load_steps=3 format=3 uid="uid://p35ypyksqpyg"]
+
+[ext_resource type="Resource" uid="uid://dib2vq0fxukc3" path="res://NPC/enemies/test_enemy/enemy_data.tres" id="1_s0mlf"]
+[ext_resource type="Script" path="res://inventory/slot_data.gd" id="2_or2u4"]
+
+[resource]
+script = ExtResource("2_or2u4")
+npc_data = ExtResource("1_s0mlf")

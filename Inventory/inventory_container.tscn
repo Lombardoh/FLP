@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://wmy3ltjyv7wu"]
-
-[node name="InventoryContainer" type="ColorRect"]
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0

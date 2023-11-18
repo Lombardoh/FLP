@@ -43,7 +43,7 @@ func take_damage(damage: int) -> void:
 	if health < 1:
 		state_machine.current_state.emit_transition_signal("DeathState")
 
-func remove_freed_objects_from_targets():
+func remove_freed_objects_from_targets() -> void:
 	var filtered_targets: Array[Node2D] = []
 
 	for target in targets:
