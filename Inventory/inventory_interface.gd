@@ -36,9 +36,10 @@ func update_grabbed_slot() -> void:
 
 func _unhandled_input(event) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+		print(npc_list)
 		var instance = npc_list.slot_datas[current_index].npc_data.npc_scene.instantiate()
 		instance.position = get_global_mouse_position()
-		add_child(instance)
+		get_parent().add_child(instance)
 	
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
 		grabbed_slot_data = null
