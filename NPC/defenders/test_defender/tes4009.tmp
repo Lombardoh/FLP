@@ -11,18 +11,18 @@
 [sub_resource type="GDScript" id="GDScript_qrsf7"]
 script/source = "extends NPC
 
+var active_follow: bool = false
+
 func _ready():
 	get_closest_target()
 	progress_bar.max_value = health
 	progress_bar.value = health
 
 func _physics_process(_delta):
-	print(targets)
 	move_and_slide()
 	
 func _on_detection_range_body_entered(body):
-	if body is CharacterBody2D:
-		add_target(body)
+	add_target(body)
 
 
 "
@@ -130,6 +130,7 @@ script = SubResource("GDScript_qrsf7")
 health = 30
 mov_speed = 20.0
 attack_speed = 1.0
+valid_targets = Array[String](["enemy"])
 attack_damage = 10
 state_machine = NodePath("FiniteStateMachine")
 attack_timer = NodePath("AttackTimer")
@@ -176,12 +177,10 @@ script = ExtResource("6_xdpll")
 actor = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 
-[node name="AttackIntervalState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player", "nav_agent_2d", "ray_cast")]
+[node name="AttackIntervalState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player")]
 script = ExtResource("7_v7xip")
 actor = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
-nav_agent_2d = NodePath("../../NavigationAgent2D")
-ray_cast = NodePath("../../RayCast2D")
 
 [node name="DeathState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player")]
 script = ExtResource("8_fh5sm")

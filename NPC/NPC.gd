@@ -4,14 +4,13 @@ class_name NPC
 @export var health: int
 @export var mov_speed: float
 @export var attack_speed: float
-@export var valid_targets: Array[String]
 @export var attack_damage: int
 @export var targets: Array[Node2D]
 @export var state_machine: FiniteStateMachine
 @export var attack_timer: Timer
 @onready var progress_bar: ProgressBar = $ProgressBar
-
 @export var current_target: Node2D
+var closest_target: Node2D = null
 
 func add_target(new_target: Node2D) -> void:
 	targets.append(new_target)
@@ -22,7 +21,6 @@ func set_new_target() -> void:
 		current_target = get_closest_target()
 
 func get_closest_target() -> Node2D:
-	var closest_target: Node2D = null
 	var closest_distance: float = 1000000
 	
 	for target in targets:

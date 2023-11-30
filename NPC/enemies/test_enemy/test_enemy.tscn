@@ -10,8 +10,10 @@
 [ext_resource type="Script" path="res://state_machine/states/death_state.gd" id="8_uqfx8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qwino"]
+size = Vector2(23, 44)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1w2cp"]
+size = Vector2(22, 19)
 
 [sub_resource type="Animation" id="Animation_x2uka"]
 length = 0.001
@@ -101,16 +103,15 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uamnq"]
-radius = 76.0066
+radius = 350.006
 
 [node name="enemy" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "attack_timer") groups=["enemy"]]
-collision_layer = 2
-collision_mask = 14
+collision_layer = 32
+collision_mask = 30
 script = ExtResource("1_h7ckw")
 health = 50
 mov_speed = 70.0
 attack_speed = 2.0
-valid_targets = Array[String](["target", "defender"])
 attack_damage = 10
 state_machine = NodePath("FiniteStateMachine")
 attack_timer = NodePath("AttackTimer")
@@ -123,13 +124,16 @@ vframes = 17
 region_rect = Rect2(0, 0, 96, 96)
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 12
+collision_layer = 32
+collision_mask = 30
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, -3)
 shape = SubResource("RectangleShape2D_qwino")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 10.5)
 shape = SubResource("RectangleShape2D_1w2cp")
 
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "actor")]
@@ -137,25 +141,30 @@ script = ExtResource("3_b2xo5")
 initial_state = NodePath("IdleState")
 actor = NodePath("..")
 
-[node name="IdleState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player")]
+[node name="IdleState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player", "nav_agent_2d", "ray_cast")]
 script = ExtResource("5_b5aq6")
 actor = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
+nav_agent_2d = NodePath("../../NavigationAgent2D")
+ray_cast = NodePath("../../RayCast2D")
 
-[node name="FollowState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player")]
+[node name="FollowState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player", "nav_agent_2d")]
 script = ExtResource("4_0gvtj")
 actor = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
+nav_agent_2d = NodePath("../../NavigationAgent2D")
 
 [node name="AttackState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player")]
 script = ExtResource("6_ahm6m")
 actor = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 
-[node name="AttackIntervalState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player")]
+[node name="AttackIntervalState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player", "nav_agent_2d", "ray_cast")]
 script = ExtResource("7_uorit")
 actor = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
+nav_agent_2d = NodePath("../../NavigationAgent2D")
+ray_cast = NodePath("../../RayCast2D")
 
 [node name="DeathState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player")]
 script = ExtResource("8_uqfx8")
@@ -168,8 +177,9 @@ libraries = {
 }
 
 [node name="DetectionRange" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 12
+visible = false
+collision_layer = 32
+collision_mask = 30
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange"]
 shape = SubResource("CircleShape2D_uamnq")
@@ -183,5 +193,11 @@ offset_top = -40.0
 offset_right = 43.0
 offset_bottom = -13.0
 scale = Vector2(0.5, 0.5)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+collision_mask = 2
 
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]

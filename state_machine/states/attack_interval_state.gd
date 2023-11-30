@@ -14,7 +14,7 @@ func physics_update(_delta: float):
 		return
 	elif not actor.current_target or actor.position.distance_to(actor.current_target.position) > 25:
 		actor.set_new_target()
-		Transition.emit(self, "FollowState")
+		Transition.emit(self, "IdleState")
 		return
 			
 	if actor.attack_timer.is_stopped():
