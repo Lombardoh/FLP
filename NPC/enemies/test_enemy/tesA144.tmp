@@ -1,37 +1,19 @@
-[gd_scene load_steps=18 format=3 uid="uid://drkhwqtc0jjix"]
+[gd_scene load_steps=18 format=3 uid="uid://cick8xahvy3ra"]
 
-[ext_resource type="Texture2D" uid="uid://d4mymfb404m0l" path="res://NPC/defenders/test_defender/test_defender.png" id="1_stnk3"]
-[ext_resource type="Script" path="res://state_machine/finite_state_machine.gd" id="3_wnfls"]
-[ext_resource type="Script" path="res://state_machine/states/idle_state.gd" id="4_sp4bv"]
-[ext_resource type="Script" path="res://state_machine/states/follow_state.gd" id="5_ijoia"]
-[ext_resource type="Script" path="res://state_machine/states/attack_state.gd" id="6_xdpll"]
-[ext_resource type="Script" path="res://state_machine/states/attack_interval_state.gd" id="7_v7xip"]
-[ext_resource type="Script" path="res://state_machine/states/death_state.gd" id="8_fh5sm"]
-
-[sub_resource type="GDScript" id="GDScript_qrsf7"]
-script/source = "extends NPC
-
-func _ready():
-	get_closest_target()
-	progress_bar.max_value = health
-	progress_bar.value = health
-
-func _physics_process(_delta):
-	print(targets)
-	move_and_slide()
-	
-func _on_detection_range_body_entered(body):
-	if body is CharacterBody2D:
-		add_target(body)
-
-
-"
+[ext_resource type="Script" path="res://NPC/enemies/test_enemy/test_enemy.gd" id="1_h7ckw"]
+[ext_resource type="Texture2D" uid="uid://b61022d5rrivy" path="res://NPC/enemies/test_enemy/test_enemy.png" id="2_bh7ld"]
+[ext_resource type="Script" path="res://state_machine/finite_state_machine.gd" id="3_b2xo5"]
+[ext_resource type="Script" path="res://state_machine/states/follow_state.gd" id="4_0gvtj"]
+[ext_resource type="Script" path="res://state_machine/states/idle_state.gd" id="5_b5aq6"]
+[ext_resource type="Script" path="res://state_machine/states/attack_state.gd" id="6_ahm6m"]
+[ext_resource type="Script" path="res://state_machine/states/attack_interval_state.gd" id="7_uorit"]
+[ext_resource type="Script" path="res://state_machine/states/death_state.gd" id="8_uqfx8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qwino"]
-size = Vector2(18, 16)
+size = Vector2(23, 44)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1w2cp"]
-size = Vector2(18, 17)
+size = Vector2(22, 19)
 
 [sub_resource type="Animation" id="Animation_x2uka"]
 length = 0.001
@@ -48,7 +30,7 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_kvwtk"]
+[sub_resource type="Animation" id="Animation_y5uq2"]
 resource_name = "attack"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -57,13 +39,13 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+"values": [220, 221, 222, 223, 224, 225, 226, 227, 228]
 }
 
-[sub_resource type="Animation" id="Animation_awpmg"]
+[sub_resource type="Animation" id="Animation_g1gsl"]
 resource_name = "death"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -72,10 +54,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [14, 15, 16, 17, 18, 19, 20, 21]
+"values": [352, 353, 354, 355, 356, 357, 358, 359, 360, 361, 367]
 }
 
 [sub_resource type="Animation" id="Animation_yphac"]
@@ -105,86 +87,84 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 37]
+"values": [22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_spxqo"]
 _data = {
 "RESET": SubResource("Animation_x2uka"),
-"attack": SubResource("Animation_kvwtk"),
-"death": SubResource("Animation_awpmg"),
+"attack": SubResource("Animation_y5uq2"),
+"death": SubResource("Animation_g1gsl"),
 "idle": SubResource("Animation_yphac"),
 "move": SubResource("Animation_jt5yv")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_1kbvq"]
-radius = 337.037
+[sub_resource type="CircleShape2D" id="CircleShape2D_uamnq"]
+radius = 350.006
 
-[node name="defender" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "attack_timer") groups=["defender"]]
-collision_layer = 16
-collision_mask = 38
-script = SubResource("GDScript_qrsf7")
-health = 30
-mov_speed = 20.0
-attack_speed = 1.0
+[node name="enemy" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "attack_timer") groups=["enemy"]]
+collision_layer = 32
+collision_mask = 30
+script = ExtResource("1_h7ckw")
+health = 50
+mov_speed = 70.0
+attack_speed = 2.0
+valid_targets = Array[String](["target", "defender"])
 attack_damage = 10
 state_machine = NodePath("FiniteStateMachine")
 attack_timer = NodePath("AttackTimer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_stnk3")
-hframes = 13
-vframes = 5
+position = Vector2(0, -43)
+texture = ExtResource("2_bh7ld")
+hframes = 22
+vframes = 17
 region_rect = Rect2(0, 0, 96, 96)
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 38
+collision_layer = 2
+collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visibility_layer = 7
-position = Vector2(-2, 0)
+position = Vector2(-0.5, -3)
 shape = SubResource("RectangleShape2D_qwino")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, 0.5)
+visible = false
+position = Vector2(0, 10.5)
 shape = SubResource("RectangleShape2D_1w2cp")
 
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "actor")]
-script = ExtResource("3_wnfls")
+script = ExtResource("3_b2xo5")
 initial_state = NodePath("IdleState")
 actor = NodePath("..")
 
-[node name="IdleState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player", "nav_agent_2d", "ray_cast")]
-script = ExtResource("4_sp4bv")
+[node name="IdleState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player")]
+script = ExtResource("5_b5aq6")
 actor = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
-nav_agent_2d = NodePath("../../NavigationAgent2D")
-ray_cast = NodePath("../../RayCast2D")
 
 [node name="FollowState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player", "nav_agent_2d")]
-script = ExtResource("5_ijoia")
+script = ExtResource("4_0gvtj")
 actor = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 nav_agent_2d = NodePath("../../NavigationAgent2D")
 
 [node name="AttackState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player")]
-script = ExtResource("6_xdpll")
+script = ExtResource("6_ahm6m")
 actor = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 
-[node name="AttackIntervalState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player", "nav_agent_2d", "ray_cast")]
-script = ExtResource("7_v7xip")
+[node name="AttackIntervalState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player")]
+script = ExtResource("7_uorit")
 actor = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
-nav_agent_2d = NodePath("../../NavigationAgent2D")
-ray_cast = NodePath("../../RayCast2D")
 
 [node name="DeathState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animation_player")]
-script = ExtResource("8_fh5sm")
+script = ExtResource("8_uqfx8")
 actor = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 
@@ -195,28 +175,23 @@ libraries = {
 
 [node name="DetectionRange" type="Area2D" parent="."]
 visible = false
-collision_layer = 16
-collision_mask = 38
+collision_layer = 32
+collision_mask = 30
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange"]
-shape = SubResource("CircleShape2D_1kbvq")
+shape = SubResource("CircleShape2D_uamnq")
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -11.0
-offset_top = -38.0
-offset_right = 40.0
-offset_bottom = -11.0
+offset_left = -16.0
+offset_top = -40.0
+offset_right = 43.0
+offset_bottom = -13.0
 scale = Vector2(0.5, 0.5)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
-debug_enabled = true
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-collision_mask = 6
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]
