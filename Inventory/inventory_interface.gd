@@ -37,7 +37,9 @@ func update_grabbed_slot() -> void:
 func _unhandled_input(event) -> void:
 	#578 320
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+		print(npc_list)
 		var instance = npc_list.slot_datas[current_index].npc_data.npc_scene.instantiate()
+
 		var global_mouse_position = get_viewport().get_mouse_position()
 		
 		var camera = get_tree().get_first_node_in_group("camera")
@@ -45,7 +47,7 @@ func _unhandled_input(event) -> void:
 		var local_mouse_position = global_mouse_position + camera_position - Vector2(578, 320)
 		
 		instance.position = local_mouse_position
-		get_parent().get_parent().add_child(instance)
+
 	
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
 		grabbed_slot_data = null
